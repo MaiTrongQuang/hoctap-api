@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HocTap API Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-rocket"></i> HocTap API Dashboard</h1>
+                <div class="status-indicator">
+                    <span id="api-status" class="status-badge checking">
+                        <i class="fas fa-circle"></i> Checking API...
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <!-- API Status Section -->
+        <section class="api-info">
+            <div class="card">
+                <h2><i class="fas fa-info-circle"></i> API Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Base URL:</label>
+                        <span id="base-url">http://localhost:8080</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Last Check:</label>
+                        <span id="last-check">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Response Time:</label>
+                        <span id="response-time">-</span>
+                    </div>
+                </div>
+                <button id="check-health" class="btn btn-secondary">
+                    <i class="fas fa-heartbeat"></i> Check Health
+                </button>
+            </div>
+        </section>
+
+        <!-- Users Management Section -->
+        <section class="users-section">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-users"></i> Users Management</h2>
+                    <button id="refresh-users" class="btn btn-secondary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                
+                <!-- Add User Form -->
+                <div class="form-section">
+                    <h3><i class="fas fa-user-plus"></i> Add New User</h3>
+                    <form id="add-user-form" class="user-form">
+                        <div class="form-group">
+                            <label for="user-name">Name:</label>
+                            <input type="text" id="user-name" placeholder="Enter user name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-email">Email:</label>
+                            <input type="email" id="user-email" placeholder="Enter user email" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add User
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Users List -->
+                <div class="users-list">
+                    <h3><i class="fas fa-list"></i> Users List</h3>
+                    <div id="users-container" class="users-grid">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i> Loading users...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Testing Section -->
+        <section class="api-testing">
+            <div class="card">
+                <h2><i class="fas fa-code"></i> API Testing</h2>
+                <div class="endpoints-grid">
+                    <div class="endpoint-item">
+                        <div class="endpoint-info">
+                            <span class="method get">GET</span>
+                            <span class="path">/health</span>
+                        </div>
+                        <button class="btn btn-outline" onclick="testEndpoint('GET', '/health')">
+                            <i class="fas fa-play"></i> Test
+                        </button>
+                    </div>
+                    <div class="endpoint-item">
+                        <div class="endpoint-info">
+                            <span class="method get">GET</span>
+                            <span class="path">/api/users</span>
+                        </div>
+                        <button class="btn btn-outline" onclick="testEndpoint('GET', '/api/users')">
+                            <i class="fas fa-play"></i> Test
+                        </button>
+                    </div>
+                    <div class="endpoint-item">
+                        <div class="endpoint-info">
+                            <span class="method get">GET</span>
+                            <span class="path">/api/users/1</span>
+                        </div>
+                        <button class="btn btn-outline" onclick="testEndpoint('GET', '/api/users/1')">
+                            <i class="fas fa-play"></i> Test
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Response Display -->
+                <div class="response-section">
+                    <h3><i class="fas fa-terminal"></i> Response</h3>
+                    <div id="response-container" class="response-display">
+                        <div class="no-response">
+                            <i class="fas fa-info-circle"></i>
+                            Test an endpoint to see the response here
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
